@@ -61,6 +61,7 @@
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             min-height: 120px;
+            user-select: none;
         }
 
         .map-card:hover {
@@ -150,8 +151,20 @@
 <script>
     function inviaMessaggioNavigazione(percorsoTarget) {
         let routePath = percorsoTarget.includes('#') ? percorsoTarget.split('#')[1] : percorsoTarget;
-        const payload = { type: 'ROUTER_NAVIGATION', action: 'navigate', url: percorsoTarget, route: routePath };
-        window.parent.postMessage(payload, '*');
+        const payload = { 
+            type: 'ROUTER_NAVIGATION', 
+            action: 'navigate', 
+            url: percorsoTarget, 
+            route: routePath 
+        };
+
+        // 1. Spedisce il messaggio al contenitore principale (iframe parent)
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage(payload, '*');
+        }
+
+        // 2. Apri anche direttamente l'URL nel browser se eseguito autonomamente
+        window.open(percorsoTarget, '_blank');
     }
 </script>
 
