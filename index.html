@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARERA Hub</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .map-card {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 30px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid #FFCC00;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-height: 120px;
+        }
+
+        .map-card:hover {
+            transform: translateY(-5px);
+            border-top-color: #eab308;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-container {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #334155;
+        }
+
+        .label {
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            color: #1e293b;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+<main class="main-content">
+    <h1 class="header-title">ARERA Hub</h1>
+
+    <div class="grid">
+
+        <!-- BILANCIO -->
+        <div class="map-card" onclick="inviaMessaggioNavigazione('https://app.powerbi.com/reportEmbed?reportId=9e87e471-8124-4948-9165-86c075c4b83d&autoAuth=true&ctid=ba941aaf-4ef6-4eae-8cee-441f432b943a')">
+            <div class="icon-container">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+            </div>
+            <span class="label">BILANCIO</span>
+        </div>
+
+        <!-- CE MAPS -->
+        <div class="map-card" onclick="inviaMessaggioNavigazione('https://mauriziomelandriformulait-svg.github.io/cas-ECO-V2/')">
+            <div class="icon-container">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+            </div>
+            <span class="label">CE MAPS</span>
+        </div>
+
+        <!-- DICHIARAZIONI -->
+        <div class="map-card" onclick="inviaMessaggioNavigazione('https://mauriziomelandriformulait-svg.github.io/Arera/')">
+            <div class="icon-container">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+            </div>
+            <span class="label">DICHIARAZIONI</span>
+        </div>
+
+        <!-- SCHEMI -->
+        <div class="map-card" onclick="inviaMessaggioNavigazione('https://mauriziomelandriformulait-svg.github.io/Arera-Schemi/')">
+            <div class="icon-container">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+            </div>
+            <span class="label">SCHEMI</span>
+        </div>
+
+    </div>
+</main>
+
+<script>
+    function inviaMessaggioNavigazione(percorsoTarget) {
+        let routePath = percorsoTarget.includes('#') ? percorsoTarget.split('#')[1] : percorsoTarget;
+        const payload = { type: 'ROUTER_NAVIGATION', action: 'navigate', url: percorsoTarget, route: routePath };
+        window.parent.postMessage(payload, '*');
+    }
+</script>
+
+</body>
+</html>
